@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>LogLogDragMeasureWinUI</RootNamespace>
+    <AssemblyName>LogLogDragMeasureWinUI</AssemblyName>
+    <UseWinUI>true</UseWinUI>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x64;AnyCPU;ARM64</Platforms>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <!-- Unpackaged (no MSIX) so it F5 / dotnet run's like the WinForms and WPF samples.
+         Without this the stock WinUI template dies at startup with REGDB_E_CLASSNOTREG. -->
+    <WindowsPackageType>None</WindowsPackageType>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Windows App SDK. Reference the COMPONENT packages, not the Microsoft.WindowsAppSDK
+         umbrella - the umbrella drags in the AI/ML/ONNX payload (~40 MB) this sample never uses. -->
+    <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="2.2.1" />
+    <PackageReference Include="Microsoft.WindowsAppSDK.Runtime" Version="2.2.0" />
+
+    <!-- ProEssentials v11 WinUI chart. The AnyCpu package embeds the native engines inside the
+         assembly and unpacks the one matching the running process at run time, so there is no
+         PEGRP*.DLL to copy (the WPF sample needs a copy target; this one does not).
+         The package also carries Gigasoft.ProEssentialsWinUI.pri - WinUI control templates live
+         there, and without it the chart renders NOTHING while every event still fires. -->
+    <PackageReference Include="ProEssentials.Chart.Net10.WinUI" Version="11.*" />
+  </ItemGroup>
+
+</Project>
