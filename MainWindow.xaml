@@ -9,7 +9,7 @@
          live in XAML is applied in code (SizeAndCenterWindow), the background and layout
          rounding moved to the root Grid, and the chart is initialized from the CHART's Loaded
          event, never the window's. -->
-    <Grid Background="#FF001A20" UseLayoutRounding="True">
+    <Grid UseLayoutRounding="True">
         <!-- ═══════════════════════════════════════════════════════════════ -->
         <!-- PesgoWinUI chart                                                -->
         <!--                                                                 -->
